@@ -35,7 +35,21 @@ while (true)
 }
 else
 {
-    // adding item stays here
+    //  ask for price
+    Console.WriteLine($"Price for {input}: ");
+    string? priceInput = Console.ReadLine();
+
+    if (int.TryParse(priceInput, out int price))
+    {
+        names.Add(input);
+        prices.Add(price);
+        Console.WriteLine($"Added {input} for {price} kr!");
+    }
+    else
+    {
+        // invalid price, dont add it
+        Console.WriteLine("That's not a valid price, item not added.");
+    }
     
 }
 }
