@@ -14,42 +14,53 @@ while (true)
     }
     Console.WriteLine($"Total: {total} kr");
 
-    Console.WriteLine("\nType an item name to add, or a number to remove: ");
+    Console.WriteLine("\nType an item name to add, a number to remove, or 'exit' to quit: ");
     string? input = Console.ReadLine().Trim();
 
-    if (int.TryParse(input, out int index))
-{
-    if (index > names.Count || index < 1)
+    if (input.ToLower() == "exit")
     {
-        // number doesnt exist, dont crash
-        Console.WriteLine($"There's no item at spot {index}");
+        Console.WriteLine("Bye!");
+    break;
     }
-    else
+
+    if (int.TryParse(input, out int index))
     {
-        index--; // switch from human numbering to real index
+        if (index > names.Count || index < 1)
+        {
+            // number doesnt exist, dont crash
+        Console.WriteLine($"There's no item at spot {index}");
+        }
+
+        else
+        {
+             index--; // switch from human numbering to real index
         string removedName = names[index];
         names.RemoveAt(index);
         prices.RemoveAt(index);
         Console.WriteLine($"{removedName} removed from the list!");
+        }
+    
+    
     }
-}
-else
-{
-    //  ask for price
+
+    else
+    {
+        //  ask for price
     Console.WriteLine($"Price for {input}: ");
     string? priceInput = Console.ReadLine();
 
     if (int.TryParse(priceInput, out int price))
-    {
-        names.Add(input);
+        {
+            names.Add(input);
         prices.Add(price);
         Console.WriteLine($"Added {input} for {price} kr!");
-    }
-    else
-    {
-        // invalid price, dont add it
+        }
+
+        else
+        {
+            // invalid price, dont add it
         Console.WriteLine("That's not a valid price, item not added.");
-    }
+         }
+        }
     
-}
-}
+    }
